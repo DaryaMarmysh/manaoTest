@@ -99,6 +99,7 @@ class User
             $user = $this->db->getUsers()[$userIndex];
             if($user['password']==md5($password).'1afa148'){
                 $_SESSION["userName"] = $user['username'];
+                setcookie("username", $user['username']);
 
             }
             else return ['passwordError'=>'Неверный пароль'];
