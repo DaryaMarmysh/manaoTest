@@ -1,5 +1,4 @@
-<?php session_start();
-?>
+
 <header>
     <p class="name"><?php echo isset($_SESSION['userName'])?'Hello '. $_SESSION["userName"]:''; ?></p>
     <?php
@@ -20,9 +19,9 @@
             </form>';
         }
     } else {
-        echo ' <form action="login.php" method="post" class="reg">
+        echo ' <form id="exitForm" onSubmit ="return false" class="reg">
         <input type="hidden" name="exit_form" value="exit">
-        <input class="header-btn" type="submit" value="Выйти">
+        <input class="header-btn" type="submit" value="Выйти" id="exit_btn">
     </form>';
     }
     ?>

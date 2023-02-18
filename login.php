@@ -8,22 +8,29 @@
     <link rel="stylesheet" href="style/style.css" type="text/css">
     <title>Авторизация</title>
 </head>
-<?php
-require './classes/User.class.php';
-
-if (isset($_POST['exit_form'])) {
-    session_unset();
-    setcookie("username", "", time() - 3600);
-}
-?>
 
 <body>
     <noscript id="noJS">
         Включите javascript!
     </noscript>
-    <?php require './header.php' ?>
+    <?php require 'header.php'; ?>
     <main>
-        <?php require 'forms/log.php' ?>
+        <form class="form" id="loginForm" onSubmit='return false'>
+            <input type="hidden" name="loginForm" value="form">
+            <input class="input" name="login" type="text" placeholder="Логин" required value='222222'>
+            <span class="error hidden" name="loginError"></span>
+
+            <input class="input" name="password" type="password" placeholder="Пароль" required value='22222q'>
+            <span class="error hidden" name="passwordError"></span>
+
+
+            <input type="submit" class="button" value="Войти" id="submit_btn_log">
+
+        </form>
+
+        <form action="index.php" method="post" class='reg'>
+            <input class="registrate-input" type="submit" value="Зарегистрироваться">
+        </form>
     </main>
     <?php require 'footer.php' ?>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>

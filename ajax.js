@@ -75,3 +75,28 @@ $('#submit_btn_log').click(function (e) {
 
 });
 
+$('#exit_btn').click(function (e) {
+
+	e.preventDefault();
+	let formData = new FormData();
+	formData.append('exit', 'true');
+	$.ajax({
+		url: 'logout.php',
+		type: 'POST',
+		dataType: 'json',
+		processData: false,
+		contentType: false,
+		cache: false,
+		data: formData,
+		success(data) {
+			if (data.status) {	
+				document.location.href = 'login.php';
+				
+			} else {
+				console.log(data.message);
+			}
+
+		}
+	});
+
+});

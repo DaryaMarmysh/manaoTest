@@ -29,7 +29,7 @@ class User
         } else if ((!preg_match('/^.{6,}$/m', $login))) {
             $loginError = "Поле должно содержать минимум 6 символов";
         } else {
-            if ($this->db->checkUnique('login',$login)!==false) $loginError .= "Данный логин занят";
+            if ($this->db->checkUnique('login', $login) !== false) $loginError .= "Данный логин занят";
         }
 
         //password validate
@@ -43,7 +43,7 @@ class User
         } else if ($password_re !== $password) {
             $password_reError = "Пороли не совпадают";
         } else {
-            $password = md5($password).'1afa148';
+            $password = md5($password) . '1afa148';
         }
 
         //email validate
@@ -52,7 +52,7 @@ class User
         } else if ((!preg_match('/[A-z0-9]+\@[A-z0-9]+\.{1}[A-z0-9]+$/m', $email))) {
             $emailError .= "Некорректный email адрес";
         } else {
-            if ($this->db->checkUnique('email',$email)!==false) $emailError .= "Пользователь с данной почтой уже существует";
+            if ($this->db->checkUnique('email', $email) !== false) $emailError .= "Пользователь с данной почтой уже существует";
         }
 
         //name validate
@@ -86,23 +86,21 @@ class User
             'email' =>  $this->email,
             'username' =>   $this->username
         ]);
-        
     }
-    public function loginUser($login,$password){
+    public function loginUser($login, $password)
+    {
         $login = clearString($login);
         $password = clearString($password);
         //login validate
         $userIndex =  $this->db->checkUnique('login', $login);
-        
+
         if ($userIndex !== false) {
-           
+
             $user = $this->db->getUsers()[$userIndex];
-            if($user['password']==md5($password).'1afa148'){
+            if ($user['password'] == md5($password) . '1afa148') {
                 $_SESSION["userName"] = $user['username'];
                 setcookie("username", $user['username']);
-
-            }
-            else return ['passwordError'=>'Неверный пароль'];
-        } else return ['loginError'=> 'Данный логин не зарегистрирован'];
+            } else return ['passwordError' => 'Неверный пароль'];
+        } else return ['loginError' => 'Данный логин не зарегистрирован'];
     }
 }
