@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -17,10 +18,10 @@
     <main>
         <form class="form" id="loginForm" onSubmit='return false'>
             <input type="hidden" name="loginForm" value="form">
-            <input class="input" name="login" type="text" placeholder="Логин" required value='222222'>
+            <input class="input" name="login" type="text" placeholder="Логин" required >
             <span class="error hidden" name="loginError"></span>
 
-            <input class="input" name="password" type="password" placeholder="Пароль" required value='22222q'>
+            <input class="input" name="password" type="password" placeholder="Пароль" required >
             <span class="error hidden" name="passwordError"></span>
 
 
@@ -28,7 +29,7 @@
 
         </form>
 
-        <form action="index.php" method="post" class='reg'>
+        <form action="../index.php" method="post" class='reg'>
             <input class="registrate-input" type="submit" value="Зарегистрироваться">
         </form>
     </main>

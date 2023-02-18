@@ -26,7 +26,7 @@ class User
         //loginvalidate
         if ($login == '') {
             $loginError .= "Заполните поле";
-        } else if ((!preg_match('/^.{6,}$/m', $login))) {
+        } else if ((!preg_match('/^.{6,}$/', $login))) {
             $loginError = "Поле должно содержать минимум 6 символов";
         } else {
             if ($this->db->checkUnique('login', $login) !== false) $loginError .= "Данный логин занят";
@@ -35,7 +35,7 @@ class User
         //password validate
         if ($password == '') {
             $passwordError .= "Заполните поле";
-        } else if (!preg_match('/(*UTF8)(?=.+[A-zА-я])(?=.+\d)^([A-zА-я0-9]){6,}$/m', $password)) {
+        } else if (!preg_match('/(?=.+[A-Za-z])(?=.+\d)^([A-Za-z0-9]){6,}$/', $password)) {
             $passwordError = "Поле должно содержать минимум 6 символов , обязательно должно состоять из цифр и букв";
         }
         if ($password_re == '') {
@@ -49,7 +49,7 @@ class User
         //email validate
         if ($email == '') {
             $emailError .= "Заполните поле";
-        } else if ((!preg_match('/[A-z0-9]+\@[A-z0-9]+\.{1}[A-z0-9]+$/m', $email))) {
+        } else if ((!preg_match('/^[A-Za-z0-9]+\@[A-Za-z0-9]+\.{1}[A-Za-z0-9]+$/', $email))) {
             $emailError .= "Некорректный email адрес";
         } else {
             if ($this->db->checkUnique('email', $email) !== false) $emailError .= "Пользователь с данной почтой уже существует";
@@ -58,7 +58,7 @@ class User
         //name validate
         if ($username == '') {
             $nameError .= "Заполните поле";
-        } else if ((!preg_match('/(*UTF8)^([A-zА-я]){2,}$/m', $username))) {
+        } else if ((!preg_match('/^(\w){2,}$/', $username))) {
             $nameError = "Поле должно содержать минимум 2 символа, только буквы";
         }
 

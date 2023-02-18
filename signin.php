@@ -1,4 +1,5 @@
 <?php
+session_start();
 if (@$_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
     require './classes/User.class.php';
 
